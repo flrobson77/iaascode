@@ -1,0 +1,31 @@
+---
+- hosts: webservers
+  become: true
+  remote_user: sysadmin
+  tasks:
+  - name: Instalando o NGINX
+    apt:
+      name: nginx
+      state: latest
+      update_cache: yes
+
+  - name: Habilitando o NGINX no boot
+    service:
+      name: nginx
+      enabled: yes
+
+  - name: Iniciando o servico
+    service:
+      name: nginx
+      state: started
+
+  - name:  Copiando aplicação para o servidor
+    copy:
+       src: ./app/index.html
+       dest: /var/www/html/index.html
+
+  handlers:
+  - name: Restartando o Nginx
+    service:
+      name: nginx
+      state: restarted

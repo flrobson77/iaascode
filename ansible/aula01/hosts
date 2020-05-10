@@ -1,0 +1,9 @@
+[homologacao]
+homologa01
+homologa02
+
+[webservers]
+homologa01
+
+[dbservers]
+homologa02
